@@ -33,7 +33,6 @@ def depurar(lista):
 			y = int(a)
 			clauses_int.append(y)
 		depurado_2.append(clauses_int)
-	print(depurado_2)
 	return depurado_2, depurado
 
 
@@ -63,17 +62,35 @@ def getCode(n, variables):
 	return code
 
 
-#def schoening(clean_data, variables, code):
+def schoening(clauses, variables, code):
+	boolean_clauses = []
+	for clause in clauses:
+		boolean_clause = []
+		for value in clause:
+			x = code.get(abs(value))
+
+			if x == 1:
+				if value<0:
+					boolean_clause.append(False)
+				else:
+					boolean_clause.append(True)
+			elif x == 0:
+				if value<0:
+					boolean_clause.append(True)
+				else:
+					boolean_clause.append(False)
+		boolean_clauses.append(boolean_clause)
+
 
 
 
 def main():
 	data = readFile()
-	clean_data, depurado = depurar(data)
+	clauses, depurado = depurar(data)
 	variables = getVariables(depurado)
 	n = len(variables)
 	code = getCode(n, variables)
-	#schoening(clean_data, variables, code)
+	schoening(clauses, variables, code)
 
 
 main()
