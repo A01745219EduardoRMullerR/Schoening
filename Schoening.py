@@ -62,7 +62,7 @@ def getCode(n, variables):
 	return code
 
 
-def schoening(clauses, variables, code):
+def getBooleanClauses(clauses, code):
 	boolean_clauses = []
 	for clause in clauses:
 		boolean_clause = []
@@ -70,16 +70,60 @@ def schoening(clauses, variables, code):
 			x = code.get(abs(value))
 
 			if x == 1:
-				if value<0:
+				if value < 0:
 					boolean_clause.append(False)
 				else:
 					boolean_clause.append(True)
 			elif x == 0:
-				if value<0:
+				if value < 0:
 					boolean_clause.append(True)
 				else:
 					boolean_clause.append(False)
 		boolean_clauses.append(boolean_clause)
+	return boolean_clauses
+
+
+def solveSAT(booleanClauses):
+	clausesResult = []
+	satisfied = []  # tendra los indices para poder identificar a cada clause
+	unsatisfied = []
+	for j in range(0, len(booleanClauses) - 1):
+		clause = booleanClauses[j]
+		num = len(clause)
+		result = False
+		for i in range(0, num - 1):
+			result = result or clause[i]
+		if result == True:
+			satisfied.append(j)
+		elif result == False:
+			unsatisfied.append(j)
+		clausesResult.append(result)
+	finalresult = booleanClauses[0]
+	n_results = len(clausesResult)
+	for k in range(1, n_results-1):
+		finalresult = finalresult and booleanClauses[k]
+	return finalresult, satisfied, unsatisfied
+
+
+def changeCode(unsatisfied, clauses):
+	print(clauses)
+
+
+def schoening(clauses, variables, code):
+	newcode = code
+	newclauses = clauses
+	n = len(variables)
+	for i in range(3*n+1):
+		booleanClauses = getBooleanClauses(newclauses, newcode)
+		result, satisfied, unsatisfied = solveSAT(booleanClauses)
+		if result == True:
+			print('Try:', i, 'was successful!!!')
+			print('Code: ', code.items())
+			break
+		elif result == False:
+			newcode, newclauses = changeCode(unsatisfied, clauses)
+
+
 
 
 
