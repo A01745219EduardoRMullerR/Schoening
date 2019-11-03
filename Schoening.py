@@ -120,7 +120,7 @@ def schoening(clauses, variables, code):
 			print('Try:', i, 'was successful!!!')
 			print('Code: ', code.items())
 			break
-		elif result == False:
+		#elif result == False:
 			#newcode, newclauses = changeCode(unsatisfied, clauses)
 
 
