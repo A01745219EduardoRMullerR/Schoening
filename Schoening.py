@@ -105,8 +105,8 @@ def solveSAT(booleanClauses):
 	return finalresult, satisfied, unsatisfied
 
 
-def changeCode(unsatisfied, clauses):
-	print(clauses)
+#def changeCode(unsatisfied, clauses):
+
 
 
 def schoening(clauses, variables, code):
@@ -121,7 +121,7 @@ def schoening(clauses, variables, code):
 			print('Code: ', code.items())
 			break
 		elif result == False:
-			newcode, newclauses = changeCode(unsatisfied, clauses)
+			#newcode, newclauses = changeCode(unsatisfied, clauses)
 
 
 
