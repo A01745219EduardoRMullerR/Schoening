@@ -4,8 +4,6 @@ from random import randint
 def readFile():
     file = open('3SAT.txt', 'r')
     lines = file.readlines()
-    lines.pop()
-    lines.pop()
     file.close()
     return lines
 
