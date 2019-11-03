@@ -1,3 +1,6 @@
+#Eduardo R Muller R A01745219
+#Fernando S Silva M A01746925
+
 from random import randint
 
 
